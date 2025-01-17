@@ -35,7 +35,7 @@ MariaDB [exam]> desc client_master;
 | bal_due  | varchar(10) | YES  |     | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 6 rows in set (0.037 sec)
-PART A Question (1)
+PART A Question (1)____________________________________________________________________________________________
 MariaDB [exam]> insert into client_master values('c123','ndahiro','huye','rango','ken1','6000'),('c124','muhoza','huye','tumba','ken1','4000'),('c125','mugisha','kigali','rango','kenew','8000'),('c126','mutesi','muhanga','rango','tolo','2000'),('c127','sangwa','nyagatre','rango','barija','6000');
 Query OK, 5 rows affected (0.094 sec)
 Records: 5  Duplicates: 0  Warnings: 0
@@ -52,7 +52,7 @@ MariaDB [exam]> select*from client_master;
 +----------+---------+----------+-------+--------+---------+
 5 rows in set (0.001 sec)
 
-PART A Question (2)..............
+PART A Question (2)---------------------------------------------------------------------------------------------------------
 
 MariaDB [exam]> select name,bal_due from client_master where bal_due>5000;
 +---------+---------+
@@ -64,7 +64,7 @@ MariaDB [exam]> select name,bal_due from client_master where bal_due>5000;
 +---------+---------+
 3 rows in set (0.001 sec)
 
-PART A Question (3)
+PART A Question (3)-------------------------------------------------------------------------------------
 
 MariaDB [exam]> update client_master set bal_due='Rs.5100' where clientno='c123';
 Query OK, 1 row affected (0.017 sec)
@@ -82,7 +82,7 @@ MariaDB [exam]> select*from client_master;
 +----------+---------+----------+-------+--------+---------+
 5 rows in set (0.001 sec)
 
-PART A Question (5)
+PART A Question (5)------------------------------------------------------------------------------------------------------
 
 MariaDB [exam]> select bal_due as BALANCE from client_master;
 +---------+
@@ -95,14 +95,14 @@ MariaDB [exam]> select bal_due as BALANCE from client_master;
 | 6000    |
 +---------+
 5 rows in set (0.001 sec)
-PART B Question (6)
+PART B Question (6)-----------------------------------------------------------------------------------------------
 
 MariaDB [exam]> create table employees(empid int(12),empname varchar(30),deptid int(30),salary int(7));
 Query OK, 0 rows affected (0.033 sec)
 
 MariaDB [exam]> create table departments(deptid int(30) primary key auto_increment,deptname varchar(30));
 Query OK, 0 rows affected (0.030 sec)
-PART B Question (6) a)
+PART B Question (6) a)-----------------------------------------------------------------------------------
 MariaDB [exam]> insert into departments values('','Ict'),('','finace'),('','laws'),('','procurement'),('','human_resource');
 Query OK, 5 rows affected, 5 warnings (0.017 sec)
 Records: 5  Duplicates: 0  Warnings: 5
@@ -123,7 +123,7 @@ MariaDB [exam]> alter table employees add foreign key(deptid) references departm
 Query OK, 0 rows affected (0.102 sec)
 Records: 0  Duplicates: 0  Warnings: 0
 
-PART B Question (6) b)
+PART B Question (6) b)----------------------------------------------------------------------------------------------
 
 MariaDB [exam]> desc employees;
 +---------+-------------+------+-----+---------+-------+
@@ -135,7 +135,7 @@ MariaDB [exam]> desc employees;
 | salary  | int(7)      | YES  |     | NULL    |       |
 +---------+-------------+------+-----+---------+-------+
 4 rows in set (0.039 sec)
-PART B Question (6) a)
+PART B Question (6) a)----------------------------------------------------------
 MariaDB [exam]> insert into employees values('001','ndahiro','1','70000'),('002','kalisa','2','35000'),('003','james','3','90000'),('
 004','gatete','4','60000'),('005','mugabo','5','40000');
 Query OK, 5 rows affected (0.018 sec)
@@ -153,7 +153,9 @@ MariaDB [exam]> select*from employees;
 +-------+---------+--------+--------+
 5 rows in set (0.001 sec)
 
-PART B Question (6) c)
+PART B Question (6) c)-------------------------------------------------------------------------------------
+
+
 MariaDB [exam]> select employees.empname,departments.deptname from employees left outer join departments on employees.deptid=departme
 nts.deptid;
 +---------+----------------+
@@ -167,7 +169,7 @@ nts.deptid;
 +---------+----------------+
 5 rows in set (0.001 sec)
 
-PART B Question (6) d)
+PART B Question (6) d)------------------------------------------------------------------------------------------------------
 
 MariaDB [exam]> select employees.empname,departments.deptname from employees right outer join departments on employees.deptid=departm
 ents.deptid;
@@ -182,7 +184,7 @@ ents.deptid;
 +---------+----------------+
 5 rows in set (0.001 sec)
 
-PART B Question (6) e)
+PART B Question (6) e)-------------------------------------------------------------------------------------------
 
 MariaDB [exam]> select *from employees where salary>(select avg(salary) from employees);
 +-------+---------+--------+--------+
@@ -194,28 +196,28 @@ MariaDB [exam]> select *from employees where salary>(select avg(salary) from emp
 +-------+---------+--------+--------+
 3 rows in set (0.002 sec)
 
-PART B Question (7)
+PART B Question (7)---------------------------------------------------------
 
 MariaDB [exam]> create table students(studentid varchar(5),fullnames varchar(25),gender varchar(6),age int(2),department varchar(30))
 ;
 Query OK, 0 rows affected (0.017 sec)
 
-PART B Question (7) 1.List of students view 
+PART B Question (7) 1.List of students view ----------------------------------------------------------------
 
 MariaDB [exam]> create view list_of_students as select* from students;
 Query OK, 0 rows affected (0.024 sec)
 
-PART B Question (7) 2.List of girls view 
+PART B Question (7) 2.List of girls view ----------------------------------------------------------------------
 
 MariaDB [exam]> create view list_of_girls as select* from students where gender='female';
 Query OK, 0 rows affected (0.021 sec)
 
-PART B Question (7) 3.List of boys view 
+PART B Question (7) 3.List of boys view ---------------------------------------------------------------------
 
 MariaDB [exam]> create view list_of_boys as select* from students where gender='male';
 Query OK, 0 rows affected (0.021 sec)
 
-PART B Question (7) 4.To insert values in students table 
+PART B Question (7) 4.To insert values in students table --------------------------------------------------------
 
 
 MariaDB [exam]> insert into students values('001','mugisha sam','male','23','bit'),('002','sangwa','male','23','bit'),('003','uwera j
@@ -223,13 +225,13 @@ oy','female','19','accounting'),('004','mutoni annet','female','18','sod'),('005
 Query OK, 5 rows affected (0.018 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
-PART B Question (7) 5.To delete the student whose age<20
+PART B Question (7) 5.To delete the student whose age<20--------------------------------------------------------------
 
 
 MariaDB [exam]> delete from students where age<20;
 Query OK, 2 rows affected (0.016 sec)
 
-PART C QUESTION 9
+PART C QUESTION 9-----------------------------------------------------
 
 MariaDB [exam]> create table employee(employee_id int primary key,first_name varchar(30),last_name varchar(30),email varchar(40),phone_number varchar(12),Hire_date date, job_id int,salary int(5),commission_pc
 t varchar(12),manager_id int,departmenT int);
@@ -276,7 +278,7 @@ MariaDB [exam]> select*from employee;
 3 rows in set (0s001 sec)
 
 MariaDB [exam]>
-PART C question 9) a)
+PART C question 9) a)-------------------------------------------------
 
 MariaDB [exam]> select employee_id,concat(first_name,' ',last_name) as names,salary as salaries from employee;
 +-------------+---------------+----------+
@@ -288,7 +290,7 @@ MariaDB [exam]> select employee_id,concat(first_name,' ',last_name) as names,sal
 +-------------+---------------+----------+
 3 rows in set (0.001 sec)
 
-PART C question 9) b).......
+PART C question 9) b)---------------------------------------------------------------
 
 MariaDB [exam]> select*from employee where manager_id=100;
 +-------------+------------+-----------+------------------+--------------+------------+--------+--------+----------------+------------+---------------+
@@ -299,7 +301,7 @@ MariaDB [exam]> select*from employee where manager_id=100;
 +-------------+------------+-----------+------------------+--------------+------------+--------+--------+----------------+------------+---------------+
 2 rows in set (0.001 sec)
 
-PART C question 9) c)....
+PART C question 9) c)---------------------------------------------------------------------------------------
 
 MariaDB [exam]> select first_name,last_name,salary from employee where salary>=4800;
 +------------+-----------+--------+
@@ -311,7 +313,7 @@ MariaDB [exam]> select first_name,last_name,salary from employee where salary>=4
 +------------+-----------+--------+
 3 rows in set (0.000 sec)
 
-PART C question 9) d)
+PART C question 9) d)---------------------------------------------------------------------------------
 
 MariaDB [exam]>MariaDB [exam]> select*from employee where last_name='austin';
 +-------------+------------+-----------+----------------+--------------+------------+--------+--------+----------------+------------+---------------+
@@ -321,7 +323,7 @@ MariaDB [exam]>MariaDB [exam]> select*from employee where last_name='austin';
 +-------------+------------+-----------+----------------+--------------+------------+--------+--------+----------------+------------+---------------+
 1 row in set (0.001 sec)
 
-PART C question 9) e)
+PART C question 9) e)---------------------------------------------------------------------------
 
 MariaDB [exam]> select first_name,last_name from employee where department_id IN(60,70,80);
 +------------+-----------+
@@ -347,20 +349,10 @@ MariaDB [exam]> desc sales;
 +-------------+-------------+------+-----+---------+-------+
 5 rows in set (0.032 sec)
 
-PART C question 10) a)
+PART C question 10) a)-----------------------------------------------
 
 MariaDB [exam]> insert into sales values('1','alex mak','muhura','20000','2003-01-15');
 Query OK, 1 row affected (0.011 sec)
-
-MariaDB [exam]> select*from sales;
-+----------+-----------+--------+-------------+------------+
-| sales_no | salesname | branch | salesamount | DOB        |
-+----------+-----------+--------+-------------+------------+
-|        1 | alex mak  | muhura | 20000       | 2003-01-15 |
-+----------+-----------+--------+-------------+------------+
-1 row in set (0.001 sec)
-
-PART C question 10) a)
 
 MariaDB [exam]> insert into sales values('2','emmy nyawe','taba','30000','2001-05-15');
 Query OK, 1 row affected (0.016 sec)
@@ -373,11 +365,6 @@ Query OK, 1 row affected (0.024 sec)
 
 MariaDB [exam]> insert into sales values('5','mugabo','muhura','90000','2002-12-2');
 Query OK, 1 row affected (0.017 sec)
-
-
-PART C question 10) a)......
-
-
 
 MariaDB [exam]> select*from sales;
 +----------+------------+--------+-------------+------------+
@@ -392,7 +379,7 @@ MariaDB [exam]> select*from sales;
 5 rows in set (0.001 sec)
 
 
-PART C question 10) b)
+PART C question 10) b)------------------------------------------------------------------------------------------
 
 
 MariaDB [exam]> select branch,sum(salesamount) as tota_sales from sales group by branch;
@@ -405,7 +392,7 @@ MariaDB [exam]> select branch,sum(salesamount) as tota_sales from sales group by
 +--------+------------+
 3 rows in set (0.001 sec)
 
-PART C question 10) c)
+PART C question 10) c)-------------------------------------------------------------------------------------------------------
 
 MariaDB [exam]> select branch,avg(salesamount) as sales_average from sales group by branch;
 +--------+---------------+
@@ -419,7 +406,7 @@ MariaDB [exam]> select branch,avg(salesamount) as sales_average from sales group
 
 
 
-PART C question 10) d)
+PART C question 10) d)-----------------------------------------------------------------------------------------------
 
 MariaDB [exam]> select sales.sales_no,sales.salesname,DATE_FORMAT(DOB, '%d-%b-%y') as formated_date from sales where MONTH(DOB)=12;
 +----------+-----------+---------------+
@@ -432,7 +419,7 @@ MariaDB [exam]> select sales.sales_no,sales.salesname,DATE_FORMAT(DOB, '%d-%b-%y
 3 rows in set (0.001 sec)
 
 
-PART C question 10) e)
+PART C question 10) e)------------------------------------------------------------------------------------------------
 
 
 MariaDB [exam]> SELECT salesname, DOB, MONTHNAME(DOB) AS month_name  FROM sales  ORDER BY MONTH(DOB);
