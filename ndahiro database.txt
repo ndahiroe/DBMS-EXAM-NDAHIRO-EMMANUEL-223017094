@@ -52,7 +52,7 @@ MariaDB [exam]> select*from client_master;
 +----------+---------+----------+-------+--------+---------+
 5 rows in set (0.001 sec)
 
-PART A Question (2)
+PART A Question (2)..............
 
 MariaDB [exam]> select name,bal_due from client_master where bal_due>5000;
 +---------+---------+
@@ -276,6 +276,8 @@ MariaDB [exam]> select*from employee;
 3 rows in set (0s001 sec)
 
 MariaDB [exam]>
+PART C question 9) a)
+
 MariaDB [exam]> select employee_id,concat(first_name,' ',last_name) as names,salary as salaries from employee;
 +-------------+---------------+----------+
 | employee_id | names         | salaries |
@@ -286,6 +288,8 @@ MariaDB [exam]> select employee_id,concat(first_name,' ',last_name) as names,sal
 +-------------+---------------+----------+
 3 rows in set (0.001 sec)
 
+PART C question 9) b).......
+
 MariaDB [exam]> select*from employee where manager_id=100;
 +-------------+------------+-----------+------------------+--------------+------------+--------+--------+----------------+------------+---------------+
 | employee_id | first_name | last_name | email            | phone_number | Hire_date  | job_id | salary | commission_pct | manager_id | department_id |
@@ -294,6 +298,8 @@ MariaDB [exam]> select*from employee where manager_id=100;
 |           2 | muhoza     | ange      | muhoza@gmail.com | 0788687688   | 2025-01-01 |      1 |  48000 | 1200           |        100 |            70 |
 +-------------+------------+-----------+------------------+--------------+------------+--------+--------+----------------+------------+---------------+
 2 rows in set (0.001 sec)
+
+PART C question 9) c)....
 
 MariaDB [exam]> select first_name,last_name,salary from employee where salary>=4800;
 +------------+-----------+--------+
@@ -305,6 +311,8 @@ MariaDB [exam]> select first_name,last_name,salary from employee where salary>=4
 +------------+-----------+--------+
 3 rows in set (0.000 sec)
 
+PART C question 9) d)
+
 MariaDB [exam]>MariaDB [exam]> select*from employee where last_name='austin';
 +-------------+------------+-----------+----------------+--------------+------------+--------+--------+----------------+------------+---------------+
 | employee_id | first_name | last_name | email          | phone_number | Hire_date  | job_id | salary | commission_pct | manager_id | department_id |
@@ -312,6 +320,8 @@ MariaDB [exam]>MariaDB [exam]> select*from employee where last_name='austin';
 |           1 | mugabo     | austin    | emmy@gmail.com | 0788687688   | 2025-01-01 |      1 |  48000 | 1200           |        100 |            60 |
 +-------------+------------+-----------+----------------+--------------+------------+--------+--------+----------------+------------+---------------+
 1 row in set (0.001 sec)
+
+PART C question 9) e)
 
 MariaDB [exam]> select first_name,last_name from employee where department_id IN(60,70,80);
 +------------+-----------+
@@ -324,7 +334,7 @@ MariaDB [exam]> select first_name,last_name from employee where department_id IN
 
 MariaDB [exam]> Create table sales(sales_no int,salesname varchar(40),branch varchar(40),salesamount varchar(30),DOB date);
 Query OK, 0 rows affected (0.017 sec)
-
+PART C question 10) a)
 MariaDB [exam]> desc sales;
 +-------------+-------------+------+-----+---------+-------+
 | Field       | Type        | Null | Key | Default | Extra |
@@ -337,6 +347,8 @@ MariaDB [exam]> desc sales;
 +-------------+-------------+------+-----+---------+-------+
 5 rows in set (0.032 sec)
 
+PART C question 10) a)
+
 MariaDB [exam]> insert into sales values('1','alex mak','muhura','20000','2003-01-15');
 Query OK, 1 row affected (0.011 sec)
 
@@ -347,6 +359,8 @@ MariaDB [exam]> select*from sales;
 |        1 | alex mak  | muhura | 20000       | 2003-01-15 |
 +----------+-----------+--------+-------------+------------+
 1 row in set (0.001 sec)
+
+PART C question 10) a)
 
 MariaDB [exam]> insert into sales values('2','emmy nyawe','taba','30000','2001-05-15');
 Query OK, 1 row affected (0.016 sec)
@@ -360,6 +374,11 @@ Query OK, 1 row affected (0.024 sec)
 MariaDB [exam]> insert into sales values('5','mugabo','muhura','90000','2002-12-2');
 Query OK, 1 row affected (0.017 sec)
 
+
+PART C question 10) a)......
+
+
+
 MariaDB [exam]> select*from sales;
 +----------+------------+--------+-------------+------------+
 | sales_no | salesname  | branch | salesamount | DOB        |
@@ -372,6 +391,10 @@ MariaDB [exam]> select*from sales;
 +----------+------------+--------+-------------+------------+
 5 rows in set (0.001 sec)
 
+
+PART C question 10) b)
+
+
 MariaDB [exam]> select branch,sum(salesamount) as tota_sales from sales group by branch;
 +--------+------------+
 | branch | tota_sales |
@@ -381,6 +404,8 @@ MariaDB [exam]> select branch,sum(salesamount) as tota_sales from sales group by
 | taba   |      30000 |
 +--------+------------+
 3 rows in set (0.001 sec)
+
+PART C question 10) c)
 
 MariaDB [exam]> select branch,avg(salesamount) as sales_average from sales group by branch;
 +--------+---------------+
@@ -392,6 +417,10 @@ MariaDB [exam]> select branch,avg(salesamount) as sales_average from sales group
 +--------+---------------+
 3 rows in set (0.001 sec)
 
+
+
+PART C question 10) d)
+
 MariaDB [exam]> select sales.sales_no,sales.salesname,DATE_FORMAT(DOB, '%d-%b-%y') as formated_date from sales where MONTH(DOB)=12;
 +----------+-----------+---------------+
 | sales_no | salesname | formated_date |
@@ -401,6 +430,10 @@ MariaDB [exam]> select sales.sales_no,sales.salesname,DATE_FORMAT(DOB, '%d-%b-%y
 |        5 | mugabo    | 02-Dec-02     |
 +----------+-----------+---------------+
 3 rows in set (0.001 sec)
+
+
+PART C question 10) e)
+
 
 MariaDB [exam]> SELECT salesname, DOB, MONTHNAME(DOB) AS month_name  FROM sales  ORDER BY MONTH(DOB);
 +------------+------------+------------+
