@@ -1,0 +1,417 @@
+
+Setting environment for using XAMPP for Windows.
+user@XDR c:\xampp\ndahiro
+# mysql.exe -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database exam;
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [(none)]> use database exam;
+ERROR 1049 (42000): Unknown database 'database'
+MariaDB [(none)]> use exam;
+Database changed
+
+PART A FOUR QUESTIONS
+
+MariaDB [exam]> create table client_master(clientno varchar(12) primary key,name varchar(30),address varchar(30),city varchar(30),state varchar(30),bal_due varchar(10));
+Query OK, 0 rows affected (0.016 sec)
+
+MariaDB [exam]> desc client_master;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| clientno | varchar(12) | NO   | PRI | NULL    |       |
+| name     | varchar(30) | YES  |     | NULL    |       |
+| address  | varchar(30) | YES  |     | NULL    |       |
+| city     | varchar(30) | YES  |     | NULL    |       |
+| state    | varchar(30) | YES  |     | NULL    |       |
+| bal_due  | varchar(10) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+6 rows in set (0.037 sec)
+PART A Question (1)
+MariaDB [exam]> insert into client_master values('c123','ndahiro','huye','rango','ken1','6000'),('c124','muhoza','huye','tumba','ken1','4000'),('c125','mugisha','kigali','rango','kenew','8000'),('c126','mutesi','muhanga','rango','tolo','2000'),('c127','sangwa','nyagatre','rango','barija','6000');
+Query OK, 5 rows affected (0.094 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [exam]> select*from client_master;
++----------+---------+----------+-------+--------+---------+
+| clientno | name    | address  | city  | state  | bal_due |
++----------+---------+----------+-------+--------+---------+
+| c123     | ndahiro | huye     | rango | ken1   | 6000    |
+| c124     | muhoza  | huye     | tumba | ken1   | 4000    |
+| c125     | mugisha | kigali   | rango | kenew  | 8000    |
+| c126     | mutesi  | muhanga  | rango | tolo   | 2000    |
+| c127     | sangwa  | nyagatre | rango | barija | 6000    |
++----------+---------+----------+-------+--------+---------+
+5 rows in set (0.001 sec)
+
+PART A Question (2)
+
+MariaDB [exam]> select name,bal_due from client_master where bal_due>5000;
++---------+---------+
+| name    | bal_due |
++---------+---------+
+| ndahiro | 6000    |
+| mugisha | 8000    |
+| sangwa  | 6000    |
++---------+---------+
+3 rows in set (0.001 sec)
+
+PART A Question (3)
+
+MariaDB [exam]> update client_master set bal_due='Rs.5100' where clientno='c123';
+Query OK, 1 row affected (0.017 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [exam]> select*from client_master;
++----------+---------+----------+-------+--------+---------+
+| clientno | name    | address  | city  | state  | bal_due |
++----------+---------+----------+-------+--------+---------+
+| c123     | ndahiro | huye     | rango | ken1   | Rs.5100 |
+| c124     | muhoza  | huye     | tumba | ken1   | 4000    |
+| c125     | mugisha | kigali   | rango | kenew  | 8000    |
+| c126     | mutesi  | muhanga  | rango | tolo   | 2000    |
+| c127     | sangwa  | nyagatre | rango | barija | 6000    |
++----------+---------+----------+-------+--------+---------+
+5 rows in set (0.001 sec)
+
+PART A Question (5)
+
+MariaDB [exam]> select bal_due as BALANCE from client_master;
++---------+
+| BALANCE |
++---------+
+| Rs.5100 |
+| 4000    |
+| 8000    |
+| 2000    |
+| 6000    |
++---------+
+5 rows in set (0.001 sec)
+PART B Question (6)
+
+MariaDB [exam]> create table employees(empid int(12),empname varchar(30),deptid int(30),salary int(7));
+Query OK, 0 rows affected (0.033 sec)
+
+MariaDB [exam]> create table departments(deptid int(30) primary key auto_increment,deptname varchar(30));
+Query OK, 0 rows affected (0.030 sec)
+PART B Question (6) a)
+MariaDB [exam]> insert into departments values('','Ict'),('','finace'),('','laws'),('','procurement'),('','human_resource');
+Query OK, 5 rows affected, 5 warnings (0.017 sec)
+Records: 5  Duplicates: 0  Warnings: 5
+
+MariaDB [exam]> select*from departments;
++--------+----------------+
+| deptid | deptname       |
++--------+----------------+
+|      1 | Ict            |
+|      2 | finace         |
+|      3 | laws           |
+|      4 | procurement    |
+|      5 | human_resource |
++--------+----------------+
+5 rows in set (0.001 sec)
+
+MariaDB [exam]> alter table employees add foreign key(deptid) references departments(deptid);
+Query OK, 0 rows affected (0.102 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+PART B Question (6) b)
+
+MariaDB [exam]> desc employees;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| empid   | int(12)     | YES  |     | NULL    |       |
+| empname | varchar(30) | YES  |     | NULL    |       |
+| deptid  | int(30)     | YES  | MUL | NULL    |       |
+| salary  | int(7)      | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.039 sec)
+PART B Question (6) a)
+MariaDB [exam]> insert into employees values('001','ndahiro','1','70000'),('002','kalisa','2','35000'),('003','james','3','90000'),('
+004','gatete','4','60000'),('005','mugabo','5','40000');
+Query OK, 5 rows affected (0.018 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [exam]> select*from employees;
++-------+---------+--------+--------+
+| empid | empname | deptid | salary |
++-------+---------+--------+--------+
+|     1 | ndahiro |      1 |  70000 |
+|     2 | kalisa  |      2 |  35000 |
+|     3 | james   |      3 |  90000 |
+|     4 | gatete  |      4 |  60000 |
+|     5 | mugabo  |      5 |  40000 |
++-------+---------+--------+--------+
+5 rows in set (0.001 sec)
+
+PART B Question (6) c)
+MariaDB [exam]> select employees.empname,departments.deptname from employees left outer join departments on employees.deptid=departme
+nts.deptid;
++---------+----------------+
+| empname | deptname       |
++---------+----------------+
+| ndahiro | Ict            |
+| kalisa  | finace         |
+| james   | laws           |
+| gatete  | procurement    |
+| mugabo  | human_resource |
++---------+----------------+
+5 rows in set (0.001 sec)
+
+PART B Question (6) d)
+
+MariaDB [exam]> select employees.empname,departments.deptname from employees right outer join departments on employees.deptid=departm
+ents.deptid;
++---------+----------------+
+| empname | deptname       |
++---------+----------------+
+| ndahiro | Ict            |
+| kalisa  | finace         |
+| james   | laws           |
+| gatete  | procurement    |
+| mugabo  | human_resource |
++---------+----------------+
+5 rows in set (0.001 sec)
+
+PART B Question (6) e)
+
+MariaDB [exam]> select *from employees where salary>(select avg(salary) from employees);
++-------+---------+--------+--------+
+| empid | empname | deptid | salary |
++-------+---------+--------+--------+
+|     1 | ndahiro |      1 |  70000 |
+|     3 | james   |      3 |  90000 |
+|     4 | gatete  |      4 |  60000 |
++-------+---------+--------+--------+
+3 rows in set (0.002 sec)
+
+PART B Question (7)
+
+MariaDB [exam]> create table students(studentid varchar(5),fullnames varchar(25),gender varchar(6),age int(2),department varchar(30))
+;
+Query OK, 0 rows affected (0.017 sec)
+
+PART B Question (7) 1.List of students view 
+
+MariaDB [exam]> create view list_of_students as select* from students;
+Query OK, 0 rows affected (0.024 sec)
+
+PART B Question (7) 2.List of girls view 
+
+MariaDB [exam]> create view list_of_girls as select* from students where gender='female';
+Query OK, 0 rows affected (0.021 sec)
+
+PART B Question (7) 3.List of boys view 
+
+MariaDB [exam]> create view list_of_boys as select* from students where gender='male';
+Query OK, 0 rows affected (0.021 sec)
+
+PART B Question (7) 4.To insert values in students table 
+
+
+MariaDB [exam]> insert into students values('001','mugisha sam','male','23','bit'),('002','sangwa','male','23','bit'),('003','uwera j
+oy','female','19','accounting'),('004','mutoni annet','female','18','sod'),('005','mugabo ari','male','29','bit');
+Query OK, 5 rows affected (0.018 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+PART B Question (7) 5.To delete the student whose age<20
+
+
+MariaDB [exam]> delete from students where age<20;
+Query OK, 2 rows affected (0.016 sec)
+
+PART C QUESTION 9
+
+MariaDB [exam]> create table employee(employee_id int primary key,first_name varchar(30),last_name varchar(30),email varchar(40),phone_number varchar(12),Hire_date date, job_id int,salary int(5),commission_pc
+t varchar(12),manager_id int,departmenT int);
+Query OK, 0 rows affected (0.028 sec)
+
+MariaDB [exam]>desc employee;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| employee_id    | int(11)     | NO   | PRI | NULL    |       |
+| first_name     | varchar(30) | YES  |     | NULL    |       |
+| last_name      | varchar(30) | YES  |     | NULL    |       |
+| email          | varchar(40) | YES  |     | NULL    |       |
+| phone_number   | varchar(12) | YES  |     | NULL    |       |
+| Hire_date      | date        | YES  |     | NULL    |       |
+| job_id         | int(11)     | YES  |     | NULL    |       |
+| salary         | int(5)      | YES  |     | NULL    |       |
+| commission_pct | varchar(12) | YES  |     | NULL    |       |
+| manager_id     | int(11)     | YES  |     | NULL    |       |
+| department_id  | int(11)     | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+11 rows in set (0.032 sec)
+
+MariaDB [exam]>
+MariaDB [exam]> insert into employee values('1','mugabo','austin','emmy@gmail.com','0788687688','2025-01-1','001','48000','1200','100','60');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [exam]> insert into employee values('2','muhoza','ange','muhoza@gmail.com','0788687688','2025-01-1','001','48000','1200','100
+','70');
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [exam]> insert into employee values('3','kagabo','erise','kagabo@gmail.com','0788687682','2025-01-1','002','48000','1200','20
+0','90');
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [exam]> select*from employee;
++-------------+------------+-----------+------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+| employee_id | first_name | last_name | email            | phone_number | Hire_date  | job_id | salary | commission_pct | manager_id | department_id |
++-------------+------------+-----------+------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+|           1 | mugabo     | austin    | emmy@gmail.com   | 0788687688   | 2025-01-01 |      1 |  48000 | 1200           |        100 |            60 |
+|           2 | muhoza     | ange      | muhoza@gmail.com | 0788687688   | 2025-01-01 |      1 |  48000 | 1200           |        100 |            70 |
+|           3 | kagabo     | erise     | kagabo@gmail.com | 0788687682   | 2025-01-01 |      2 |  48000 | 1200           |        200 |            90 |
++-------------+------------+-----------+------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+3 rows in set (0s001 sec)
+
+MariaDB [exam]>
+MariaDB [exam]> select employee_id,concat(first_name,' ',last_name) as names,salary as salaries from employee;
++-------------+---------------+----------+
+| employee_id | names         | salaries |
++-------------+---------------+----------+
+|           1 | mugabo austin |    48000 |
+|           2 | muhoza ange   |    48000 |
+|           3 | kagabo erise  |    48000 |
++-------------+---------------+----------+
+3 rows in set (0.001 sec)
+
+MariaDB [exam]> select*from employee where manager_id=100;
++-------------+------------+-----------+------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+| employee_id | first_name | last_name | email            | phone_number | Hire_date  | job_id | salary | commission_pct | manager_id | department_id |
++-------------+------------+-----------+------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+|           1 | mugabo     | austin    | emmy@gmail.com   | 0788687688   | 2025-01-01 |      1 |  48000 | 1200           |        100 |            60 |
+|           2 | muhoza     | ange      | muhoza@gmail.com | 0788687688   | 2025-01-01 |      1 |  48000 | 1200           |        100 |            70 |
++-------------+------------+-----------+------------------+--------------+------------+--------+--------+----------------+------------+---------------+
+2 rows in set (0.001 sec)
+
+MariaDB [exam]> select first_name,last_name,salary from employee where salary>=4800;
++------------+-----------+--------+
+| first_name | last_name | salary |
++------------+-----------+--------+
+| mugabo     | austin    |  48000 |
+| muhoza     | ange      |  48000 |
+| kagabo     | erise     |  48000 |
++------------+-----------+--------+
+3 rows in set (0.000 sec)
+
+MariaDB [exam]>MariaDB [exam]> select*from employee where last_name='austin';
++-------------+------------+-----------+----------------+--------------+------------+--------+--------+----------------+------------+---------------+
+| employee_id | first_name | last_name | email          | phone_number | Hire_date  | job_id | salary | commission_pct | manager_id | department_id |
++-------------+------------+-----------+----------------+--------------+------------+--------+--------+----------------+------------+---------------+
+|           1 | mugabo     | austin    | emmy@gmail.com | 0788687688   | 2025-01-01 |      1 |  48000 | 1200           |        100 |            60 |
++-------------+------------+-----------+----------------+--------------+------------+--------+--------+----------------+------------+---------------+
+1 row in set (0.001 sec)
+
+MariaDB [exam]> select first_name,last_name from employee where department_id IN(60,70,80);
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| mugabo     | austin    |
+| muhoza     | ange      |
++------------+-----------+
+2 rows in set (0.001 sec)
+
+MariaDB [exam]> Create table sales(sales_no int,salesname varchar(40),branch varchar(40),salesamount varchar(30),DOB date);
+Query OK, 0 rows affected (0.017 sec)
+
+MariaDB [exam]> desc sales;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| sales_no    | int(11)     | YES  |     | NULL    |       |
+| salesname   | varchar(40) | YES  |     | NULL    |       |
+| branch      | varchar(40) | YES  |     | NULL    |       |
+| salesamount | varchar(30) | YES  |     | NULL    |       |
+| DOB         | date        | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.032 sec)
+
+MariaDB [exam]> insert into sales values('1','alex mak','muhura','20000','2003-01-15');
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [exam]> select*from sales;
++----------+-----------+--------+-------------+------------+
+| sales_no | salesname | branch | salesamount | DOB        |
++----------+-----------+--------+-------------+------------+
+|        1 | alex mak  | muhura | 20000       | 2003-01-15 |
++----------+-----------+--------+-------------+------------+
+1 row in set (0.001 sec)
+
+MariaDB [exam]> insert into sales values('2','emmy nyawe','taba','30000','2001-05-15');
+Query OK, 1 row affected (0.016 sec)
+
+MariaDB [exam]> insert into sales values('3','gabin','rango','40000','2009-12-21');
+Query OK, 1 row affected (0.015 sec)
+
+MariaDB [exam]> insert into sales values('4','muhoza','rango','10000','2009-12-20');
+Query OK, 1 row affected (0.024 sec)
+
+MariaDB [exam]> insert into sales values('5','mugabo','muhura','90000','2002-12-2');
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [exam]> select*from sales;
++----------+------------+--------+-------------+------------+
+| sales_no | salesname  | branch | salesamount | DOB        |
++----------+------------+--------+-------------+------------+
+|        1 | alex mak   | muhura | 20000       | 2003-01-15 |
+|        2 | emmy nyawe | taba   | 30000       | 2001-05-15 |
+|        3 | gabin      | rango  | 40000       | 2009-12-21 |
+|        4 | muhoza     | rango  | 10000       | 2009-12-20 |
+|        5 | mugabo     | muhura | 90000       | 2002-12-02 |
++----------+------------+--------+-------------+------------+
+5 rows in set (0.001 sec)
+
+MariaDB [exam]> select branch,sum(salesamount) as tota_sales from sales group by branch;
++--------+------------+
+| branch | tota_sales |
++--------+------------+
+| muhura |     110000 |
+| rango  |      50000 |
+| taba   |      30000 |
++--------+------------+
+3 rows in set (0.001 sec)
+
+MariaDB [exam]> select branch,avg(salesamount) as sales_average from sales group by branch;
++--------+---------------+
+| branch | sales_average |
++--------+---------------+
+| muhura |         55000 |
+| rango  |         25000 |
+| taba   |         30000 |
++--------+---------------+
+3 rows in set (0.001 sec)
+
+MariaDB [exam]> select sales.sales_no,sales.salesname,DATE_FORMAT(DOB, '%d-%b-%y') as formated_date from sales where MONTH(DOB)=12;
++----------+-----------+---------------+
+| sales_no | salesname | formated_date |
++----------+-----------+---------------+
+|        3 | gabin     | 21-Dec-09     |
+|        4 | muhoza    | 20-Dec-09     |
+|        5 | mugabo    | 02-Dec-02     |
++----------+-----------+---------------+
+3 rows in set (0.001 sec)
+
+MariaDB [exam]> SELECT salesname, DOB, MONTHNAME(DOB) AS month_name  FROM sales  ORDER BY MONTH(DOB);
++------------+------------+------------+
+| salesname  | DOB        | month_name |
++------------+------------+------------+
+| alex mak   | 2003-01-15 | January    |
+| emmy nyawe | 2001-05-15 | May        |
+| gabin      | 2009-12-21 | December   |
+| muhoza     | 2009-12-20 | December   |
+| mugabo     | 2002-12-02 | December   |
++------------+------------+------------+
+5 rows in set (0.001 sec)
+
+MariaDB [exam]>
